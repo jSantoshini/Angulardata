@@ -1,0 +1,333 @@
+<div class="wrapper">
+    <div class="content-wrapper" style="margin-top: 0px;">
+       <div class="content-header">
+        <!-- <p>customer works!</p>
+       </div>
+    </div>
+</div>
+<div class="container"> -->
+  <div class="card p-2">
+    <div class="row">
+      <div class="col">
+        <label>Customer</label>
+      </div>
+      <div class="col">
+        <button class="btn btn-primary float-end" *ngIf="!createcustomer" (click)="createform()">
+          Createcustomer
+        </button>
+        <button class="btn btn-primary float-end" *ngIf="createcustomer" (click)="createform()">
+            ShowallCustomers</button>
+      </div>
+    </div>
+  </div>
+  <div class="card" *ngIf="createcustomer">
+    <div class="card-body">
+      <!-- <div class="container"> -->
+      <!-- <h1>Business</h1> -->
+
+      <form
+        #customerForm="ngForm"
+        (ngSubmit)="customerForm.form.valid && customerf()">
+        <div class="row">
+          <div class="col">
+            <div class="form-group">
+              <label for="customername">CustomerName</label><br />
+              <input
+                type="text"
+                name="customername"
+                [(ngModel)]="customer.customername"
+                class="form-control me-2"
+                type="text"
+                required
+                #customername="ngModel"
+                [ngClass]="{
+                  'is-invalid': customerForm.submitted && customername.errors
+                }"
+                placeholder="customername"
+              />
+              <div
+                *ngIf="customerForm.submitted && customername.errors"
+                class="invalid-feedback"
+              >
+                <div *ngIf="customername.errors['required']">
+                  <span style="color: red">Customername is required</span>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="col">
+            <div class="form-group">
+              <label for="mailid">MailId</label><br />
+              <input
+                type="text"
+                name="mailid"
+                [(ngModel)]="customer.mailid"
+                class="form-control me-2"
+                type="text"
+                required
+                #mailid="ngModel"
+                [ngClass]="{
+                  'is-invalid': customerForm.submitted && mailid.errors
+                }"
+                placeholder="mailid"
+              />
+              <div
+                *ngIf="customerForm.submitted && mailid.errors"
+                class="invalid-feedback"
+              >
+                <div *ngIf="mailid.errors['required']">
+                  <span style="color: red">MailId is required</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-6">
+            <div class="form-group">
+              <label for="countryid">CountryId</label><br />
+              <input
+                type="text"
+                name="countryid"
+                [(ngModel)]="customer.countryid"
+                class="form-control me-2"
+                type="text"
+                required
+                #countryid="ngModel"
+                [ngClass]="{
+                  'is-invalid': customerForm.submitted && countryid.errors
+                }"
+                placeholder="countryid"
+              />
+              <div
+                *ngIf="customerForm.submitted && countryid.errors"
+                class="invalid-feedback"
+              >
+                <div *ngIf="countryid.errors['required']">
+                  <span style="color: red">CountryId is required</span>
+                </div>
+              </div>
+            </div>
+
+          </div>
+        </div>
+
+
+
+
+        <!-- <pre></pre> -->
+
+        <button class="btn btn-primary" type="submit">Submit</button>
+      </form>
+    </div>
+  </div>
+
+  <!-- to view enteries rows in a table -->
+  <hr />
+  <div class="card">
+    <div class="card-body">
+      <div>
+        <h2>Business Data View</h2>
+        <table class="table text-center table-bordered">
+          <!-- table datatable text-center table-bordered -->
+          <thead>
+            <th>S.No</th>
+            <th >CustomerName</th>
+            <th >MailId</th>
+            <th >CountryId</th>
+            <th>Action</th>
+          </thead>
+
+          <tbody>
+            <tr *ngFor="let arr of customersdata; let i = index">
+              <td class="p-1">{{ i + 1 }}</td>
+              <td class="p-1">
+                <!-- <div  *ngIf="arr.isEdit"> -->
+                <input
+                  class="form-control"
+                  type="text"
+                  name="customerName"
+                  [(ngModel)]="arr.customerName"
+                  *ngIf="arr.isEdit"
+                  class="p-1"
+                />
+                <!-- </div> -->
+
+                <label class="p-1 font-weight-normal" *ngIf="!arr.isEdit">{{
+                  arr.customerName
+                }}</label>
+              </td>
+              <td class="p-1">
+                <!-- <div  *ngIf="arr.isEdit"> -->
+                <input
+                  class="form-control"
+                  type="text"
+                  name="mailid"
+                  [(ngModel)]="arr.mailid"
+                  *ngIf="arr.isEdit"
+                  class="p-1"
+                />
+                <!-- </div> -->
+
+                <label class="p-1 font-weight-normal" *ngIf="!arr.isEdit">{{
+                  arr.mailid
+                }}</label>
+              </td>
+
+              <td class="p-1">
+                <!-- <div  *ngIf="arr.isEdit"> -->
+                <input
+                  class="form-control"
+                  type="text"
+                  name="countryid"
+                  [(ngModel)]="arr.countryid"
+                  *ngIf="arr.isEdit"
+                  class="p-1"
+                />
+                <!-- </div> -->
+
+                <label class="p-1 font-weight-normal" *ngIf="!arr.isEdit">{{
+                  arr.countryid
+                }}</label>
+              </td>
+
+              <td class="p-1">
+                <div *ngIf="arr.isEdit">
+                  <!-- <td class="p-1"> -->
+                    <!-- <button
+                      type="button"
+                      class="btn btn-primary mr-2"
+                      (click)="updatecustomer(i)"
+                    > -->
+                    <i class="bi bi-arrow-up-circle mr-2" (click)="updatecustomer(i)"></i>
+                    <!-- </button> -->
+                  <!-- </td> -->
+                  <!-- <td class="p-1"> -->
+                    <!-- <button
+                      type="button"
+                      class="btn btn-primary mr-2"
+                      (click)="arr.isEdit = false"
+                    > -->
+                    <i class="bi bi-x-circle mr-2" (click)="arr.isEdit = false"></i>
+                    <!-- </button> -->
+                  <!-- </td> -->
+                </div>
+                <div *ngIf="!arr.isEdit">
+                  <!-- <button
+                    type="button"
+                    class="btn btn-primary mr-2"
+                    (click)="onEdit(arr)"
+                  > -->
+                  <i class="bi bi-pencil-square mr-2" (click)="onEdit(arr)"></i>
+                  <!-- </button> -->
+
+                  <!-- <button
+                    type="button"
+                    class="btn btn-primary mr-2"
+                    (click)="deletecustomer(arr.customerid)"
+                  > -->
+                  <i class="bi bi-trash3" (click)="deletecustomer(arr.customerid)"></i>
+                  <!-- </button> -->
+                </div>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+
+    <!-- <h1>Create Customer</h1>
+
+    <form #customerForm="ngForm" (ngSubmit)="customerForm.form.valid && customerf()">
+  <div class="form-group">
+        <label for="customerName">customerName</label><br />
+        <input type="text" name="customerName" [(ngModel)]="customer.customerName" class="form-control me-2" type="text"
+        required #customerName="ngModel"
+        [ngClass]="{ 'is-invalid': customerForm.submitted && customerName.errors }"
+        placeholder="customerName" />
+        <div *ngIf="customerForm.submitted && customerName.errors" class="invalid-feedback">
+          <div *ngIf="customerName.errors['required']">
+            <span style="color: red;">customerName is required</span></div>
+        </div>
+
+       <pre></pre> -->
+
+    <!-- <div class="form-group">
+        <label for="mailid">mailid</label><br />
+        <input type="text" name="mailid" [(ngModel)]="customer.mailid" class="form-control me-2" type="text"
+        required pattern="[^ @]*@[^ @]*" email #email="ngModel" [ngClass]="{ 'is-invalid': customerForm.submitted && email.errors }"
+        placeholder="mailid" />
+        <div *ngIf="customerForm.submitted && email.errors" class="invalid-feedback">
+          <div *ngIf="email.errors['required']">
+            <span style="color: red;">MailId is required</span></div>
+          <div *ngIf="email.errors['email']">
+            <span style="color: red;">MailId is invalid</span> </div>
+        </div>
+    </div> -->
+       <!-- <pre></pre>
+
+       <div class="form-group">
+        <label for="countryid">countryid</label><br />
+        <input type="text" name="countryid" [(ngModel)]="customer.countryid" class="form-control me-2" type="text"
+        required #countryid="ngModel"
+        [ngClass]="{ 'is-invalid': customerForm.submitted && countryid.errors }"
+        placeholder="countryid" />
+        <div *ngIf="customerForm.submitted && countryid.errors" class="invalid-feedback">
+          <div *ngIf="countryid.errors['required']">
+            <span style="color: red;">countryid is required</span></div>
+        </div>
+
+      </div>
+
+       <! <pre></pre> -->
+      <!-- <button class="btn btn-primary" type="submit">Submit</button>
+
+  <// to view enteries rows in a table -->
+  <!-- <hr>
+      <div>
+        <h2>Customer Data View</h2>
+        <table>
+        <thead>
+        <th >S.No</th>
+        <th >customerName</th>
+        <th >mailid</th>
+        <th >countryid</th>
+        </thead>
+         <tbody >
+          <tr *ngFor="let arr of customersdata; let i = index">
+            <td class="p-1">{{i+1}}</td>
+            <td>
+              <div *ngIf="arr.isEdit">
+                <input  type="text" name="customerName" [(ngModel)]="arr.customerName"  class="formControl"/>
+              </div>
+              <div *ngIf="!arr.isEdit">{{arr.customerName}}
+              </div>
+             </td>
+            <td>
+              <div *ngIf="arr.isEdit">
+                <input type="text" name="mailid" [(ngModel)]="arr.mailid"  class="formControl"/>
+              </div>
+              <div *ngIf="!arr.isEdit">{{arr.mailid}}
+              </div>
+            </td>
+            <td>
+              <div *ngIf="arr.isEdit">
+                <input type="text" name="countryid" [(ngModel)]="arr.countryid" class="formControl"/>
+              </div>
+              <div *ngIf="!arr.isEdit">{{arr.countryid}}
+              </div>
+            </td>
+                <div *ngIf="arr.isEdit">
+                  <td><button type="button"  (click)="updatecustomer(i)">Update</button></td>
+                  <td><button type="button" (click)="arr.isEdit=false">cancel</button></td>
+                </div>
+                <div *ngIf="!arr.isEdit">
+                  <td><button type="button" (click)="onEdit(arr)">Edit</button></td>
+                  <td><button type="button" (click)="deletecustomer(arr.customerid)">Delete</button></td>
+
+                </div>
+          </tr>
+         </tbody>
+        </table>
+    </div>  -->

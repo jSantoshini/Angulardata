@@ -1,0 +1,181 @@
+
+<div class="wrapper">
+  <div class="content-wrapper" style="margin-top: 0px;">
+     <div class="content-header">
+      <div class="card p-2">
+        <div class="row">
+          <div class="col">
+            <label>User Security</label>
+          </div>
+          <!-- <div class="col">
+            <button class="btn btn-primary float-end" *ngIf="!createsubcategory" (click)="createform()">
+              CreateSubcategory
+            </button>
+            <button class="btn btn-primary float-end" *ngIf="createsubcategory" (click)="createform()">
+                ShowallSubcategories</button>
+          </div> -->
+        </div>
+      </div>
+      <div class="card">
+        <div class="card-body">
+          <div class="container">
+          <!-- <h1>Business</h1> -->
+
+          <form
+            #usersecurityForm="ngForm"
+            >
+            <div class="row">
+              <div class="col-6">
+                <div class="form-group">
+                  <label for="userName">User</label><br />
+                  <mat-select
+                    type="text"
+                    name="userName"
+                    [(ngModel)]="dd_user"
+                    class="form-control me-2"
+                    type="text"
+                    required
+                    #userName="ngModel"
+                    [ngClass]="{
+                      'is-invalid': usersecurityForm.submitted && userName.errors
+                    }"
+                    placeholder="username" (selectionChange)="dropdownf()">
+                    <mat-option>select user</mat-option>
+                    <mat-option *ngFor="let arr of users" [value]="arr.userid">{{arr.userName}}</mat-option>
+                  </mat-select>
+                  <div
+                    *ngIf="usersecurityForm.submitted && userName.errors"
+                    class="invalid-feedback"
+                  >
+                    <div *ngIf="userName.errors['required']">
+                      <span style="color: red">select the userName</span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-6">
+                <div class="form-group">
+                  <label for="productname">Product</label><br />
+                  <mat-select
+                    type="text"
+                    name="productname"
+                    [(ngModel)]="dd_product"
+                    class="form-control me-2"
+                    type="text"
+                    required
+                    #productname="ngModel"
+                    [ngClass]="{
+                      'is-invalid': usersecurityForm.submitted && productname.errors
+                    }"
+                    placeholder="productname" multiple>
+                    <mat-label >Select productname</mat-label>
+                    <mat-option *ngFor="let arr of productsdata" [value]="arr.productid">{{arr.productname}}</mat-option>
+                  </mat-select>
+                  <div
+                    *ngIf="usersecurityForm.submitted && productname.errors"
+                    class="invalid-feedback"
+                  >
+                    <div *ngIf="productname.errors['required']">
+                      <span style="color: red">select the product</span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="col-6">
+                <div class="form-group">
+                  <label for="businessname">Line of Business</label><br />
+                  <mat-select
+                    type="text"
+                    name="businessname"
+                    [(ngModel)]="dd_business"
+                    class="form-control me-2"
+                    type="text"
+                    required
+                    #businessname="ngModel"
+                    [ngClass]="{
+                      'is-invalid': usersecurityForm.submitted && businessname.errors
+                    }"
+                    placeholder="businessname" multiple>
+                    <mat-label >Select businessname</mat-label>
+                    <mat-option *ngFor="let arr of lineofbusiness" [value]="arr.businessid">{{arr.businessname}}</mat-option>
+                  </mat-select>
+                  <div
+                    *ngIf="usersecurityForm.submitted && businessname.errors"
+                    class="invalid-feedback"
+                  >
+                    <div *ngIf="businessname.errors['required']">
+                      <span style="color: red">select the lineofbusiness</span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-6">
+                <div class="form-group">
+                  <label for="customerName">Customer</label><br />
+                  <mat-select
+                    type="text"
+                    name="customerName"
+                    [(ngModel)]="dd_customer"
+                    class="form-control me-2"
+                    type="text"
+                    required
+                    #customerName="ngModel"
+                    [ngClass]="{
+                      'is-invalid': usersecurityForm.submitted && customerName.errors
+                    }"
+                    placeholder="customername" multiple>
+                    <mat-label >Select customerName</mat-label>
+                    <mat-option *ngFor="let arr of customersdata" [value]="arr.customerid">{{arr.customerName}}</mat-option>
+                  </mat-select>
+                  <div
+                    *ngIf="usersecurityForm.submitted && customerName.errors"
+                    class="invalid-feedback"
+                  >
+                    <div *ngIf="customerName.errors['required']">
+                      <span style="color: red">select the customer</span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="col-6">
+                <div class="form-group">
+                  <label for="countryname">Country</label><br />
+                  <mat-select
+                    type="text"
+                    name="countryname"
+                    [(ngModel)]="dd_country"
+                    class="form-control me-2"
+                    type="text"
+                    required
+                    #countryname="ngModel"
+                    [ngClass]="{
+                      'is-invalid': usersecurityForm.submitted && countryname.errors
+                    }"
+                    placeholder="countryname" multiple>
+                    <mat-label >Select countryname</mat-label>
+                    <mat-option *ngFor="let arr of countries" [value]="arr.countryid">{{arr.countryname}}</mat-option>
+                  </mat-select>
+                  <div
+                    *ngIf="usersecurityForm.submitted && countryname.errors"
+                    class="invalid-feedback"
+                  >
+                    <div *ngIf="countryname.errors['required']">
+                      <span style="color: red">select the Country</span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+
+            </div>
+            <button class="btn btn-primary" *ngIf="securitydata" (click)="submitf()">Submit</button>
+            <button class="btn btn-primary" *ngIf="!securitydata" (click)="updatef()">Update</button>
+            </form>
+        </div>
+      </div>
+  </div>
+</div>

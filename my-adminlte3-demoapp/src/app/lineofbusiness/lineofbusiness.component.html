@@ -1,0 +1,181 @@
+<div class="wrapper">
+  <div class="content-wrapper" style="margin-top: 0px">
+    <div class="content-header">
+      <!-- <p>country works!</p>
+        </div> -->
+      <!-- </div>
+    </div> -->
+      <div class="card p-2">
+        <div class="row">
+          <div class="col">
+            <label>Business</label>
+          </div>
+          <div class="col">
+            <button class="btn btn-primary float-end" *ngIf="!createbusiness" (click)="createform()">
+              CreateBusiness
+            </button>
+            <button class="btn btn-primary float-end" *ngIf="createbusiness" (click)="createform()">
+                ShowallBusiness</button>
+          </div>
+        </div>
+      </div>
+      <div class="card" *ngIf="createbusiness">
+        <div class="card-body">
+          <!-- <div class="container"> -->
+          <!-- <h1>Business</h1> -->
+
+          <form
+            #businessForm="ngForm"
+            (ngSubmit)="businessForm.form.valid && lineofbusinessf()">
+            <div class="row">
+              <div class="col-6">
+                <div class="form-group">
+                  <label for="businessname">BusinessName</label><br />
+                  <input
+                    type="text"
+                    name="businessname"
+                    [(ngModel)]="business.businessname"
+                    class="form-control me-2"
+                    type="text"
+                    required
+                    #businessname="ngModel"
+                    [ngClass]="{
+                      'is-invalid': businessForm.submitted && businessname.errors
+                    }"
+                    placeholder="businessname"
+                  />
+                  <div
+                    *ngIf="businessForm.submitted && businessname.errors"
+                    class="invalid-feedback"
+                  >
+                    <div *ngIf="businessname.errors['required']">
+                      <span style="color: red">Businessname is required</span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+            </div>
+
+            <!-- <pre></pre> -->
+
+            <button class="btn btn-primary" type="submit">Submit</button>
+          </form>
+        </div>
+      </div>
+
+      <!-- to view enteries rows in a table -->
+      <hr />
+      <div class="card">
+        <div class="card-body">
+          <div>
+            <h2>Business Data View</h2>
+            <table class="table text-center table-bordered">
+              <!-- table datatable text-center table-bordered -->
+              <thead>
+                <th>S.No</th>
+                <th>Businessname</th>
+                <th>Action</th>
+              </thead>
+
+              <tbody>
+                <tr *ngFor="let arr of lineofbusiness; let i = index">
+                  <td class="p-1">{{ i + 1 }}</td>
+                  <td class="p-1">
+                    <!-- <div  *ngIf="arr.isEdit"> -->
+                    <input
+                      class="form-control"
+                      type="text"
+                      name="businessname"
+                      [(ngModel)]="arr.businessname"
+                      *ngIf="arr.isEdit"
+                      class="p-1"
+                    />
+                    <!-- </div> -->
+
+                    <label class="p-1 font-weight-normal" *ngIf="!arr.isEdit">{{
+                      arr.businessname
+                    }}</label>
+                  </td>
+                  <td class="p-1">
+                    <div *ngIf="arr.isEdit">
+                      <!-- <td class="p-1"> -->
+                        <!-- <button
+                          type="button"
+                          class="btn btn-primary mr-2"
+                          (click)="updatebusiness(i)"
+                        > -->
+                        <i class="bi bi-arrow-up-circle mr-2" (click)="updatebusiness(i)"></i>
+                        <!-- </button> -->
+                      <!-- </td> -->
+                      <!-- <td class="p-1"> -->
+                        <!-- <button
+                          type="button"
+                          class="btn btn-primary mr-2"
+                          (click)="arr.isEdit = false"
+                        > -->
+                        <i class="bi bi-x-circle mr-2" (click)="arr.isEdit = false"></i>
+                        <!-- </button> -->
+                      <!-- </td> -->
+                    </div>
+                    <div *ngIf="!arr.isEdit">
+                      <!-- <button
+                        type="button"
+                        class="btn btn-primary mr-2"
+                        (click)="onEdit(arr)"
+                      > -->
+                      <i class="bi bi-pencil-square mr-2" (click)="onEdit(arr)"></i>
+                      <!-- </button> -->
+
+                      <!-- <button
+                        type="button"
+                        class="btn btn-primary mr-2"
+                        (click)="deletebusiness(arr.businessid)"
+                      > -->
+                      <i class="bi bi-trash3" (click)="deletebusiness(arr.businessid)"></i>
+                      <!-- </button> -->
+                    </div>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+
+      <!-- <form #lineofbusinessForm="ngForm" (ngSubmit)="onSubmit(lineofbusinessForm.value)">
+      <div class="form-group">
+        <label for="businessid">businessid</label><br />
+
+        <input type="text" name="businessid" #businessid="ngModel" class="form-control" ngModel/> -->
+      <!-- <button type="submit">submit</button> -->
+      <!-- </div>
+      <pre></pre>
+      <div class="form-group">
+        <label for="businessname">businessname</label><br /> -->
+
+      <!-- <input type="text" name="businessname" #businessname="ngModel" class="form-control" ngModel/>
+        <button type="submit">submit</button>
+      </div>
+      <pre></pre> -->
+
+      <!-- <button class="btn btn-primary" type="submit">Submit</button>
+    </form> -->
+      <!-- <hr>
+    <div>
+      <table>
+      <thead>
+      <th class="tableHead">businessid</th>
+      <th class="tableHead">businessname</th>
+      </thead>
+       <tbody >
+        <tr *ngFor="let arr of  lineofbusiness">
+          <td>{{arr.businessid}}</td>
+          <td>{{arr.businessname}}</td>
+        </tr>
+       </tbody>
+      </table>
+  </div> -->
+    </div>
+  </div>
+</div>

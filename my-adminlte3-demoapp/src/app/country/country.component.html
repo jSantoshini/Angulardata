@@ -1,0 +1,208 @@
+<div class="wrapper">
+    <div class="content-wrapper" style="margin-top: 0px;">
+       <div class="content-header">
+        <div class="card p-2">
+          <div class="row">
+            <div class="col">
+              <label>Country</label>
+            </div>
+            <div class="col">
+              <button class="btn btn-primary float-end" *ngIf="!createcountry" (click)="createform()">
+                CreateCountry
+              </button>
+              <button class="btn btn-primary float-end" *ngIf="createcountry" (click)="createform()">
+                  showallcountries</button>
+            </div>
+        </div>
+        <!-- <div *ngIf="!createcountry"></div>
+        <button class="btn btn-primary float-end" >
+          showallcountry
+        </button> -->
+        <div class="card" *ngIf="createcountry">
+          <!-- <div class="card" *ngIf="showallcountry"> -->
+          <div class="card-body">
+            <!-- <div class="container"> -->
+            <!-- <h1>Business</h1> -->
+
+            <form
+              #countryForm="ngForm"
+              (ngSubmit)="countryForm.form.valid && countryf()">
+              <div class="row">
+                <div class="col-6">
+                  <div class="form-group">
+                    <label for="countryname">CountryName</label><br />
+                    <input
+                      type="text"
+                      name="countryname"
+                      [(ngModel)]="country.countryname"
+                      class="form-control me-2"
+                      type="text"
+                      required
+                      #countryname="ngModel"
+                      [ngClass]="{
+                        'is-invalid': countryForm.submitted && countryname.errors
+                      }"
+                      placeholder="countryname"
+                    />
+                    <div
+                      *ngIf="countryForm.submitted && countryname.errors"
+                      class="invalid-feedback"
+                    >
+                      <div *ngIf="countryname.errors['required']">
+                        <span style="color: red">countryname is required</span>
+                      </div>
+                    </div>
+                  </div>
+
+                </div>
+              </div>
+
+              <!-- <pre></pre> -->
+
+              <button class="btn btn-primary" type="submit">Submit</button>
+
+            </form>
+
+
+          </div>
+        </div>
+
+        <!-- to view enteries rows in a table -->
+        <hr />
+        <div class="card">
+          <div class="card-body">
+            <div>
+              <h2>Country Data View</h2>
+              <table class="table text-center table-bordered">
+                <!-- table datatable text-center table-bordered -->
+                <thead>
+                  <th>S.No</th>
+                  <th>countryname</th>
+                  <th>Action</th>
+                </thead>
+
+                <tbody>
+                  <tr *ngFor="let arr of countries; let i = index">
+                    <td class="p-1">{{ i + 1 }}</td>
+                    <td class="p-1">
+                      <!-- <div  *ngIf="arr.isEdit"> -->
+                      <input
+                        class="form-control"
+                        type="text"
+                        name="countryname"
+                        [(ngModel)]="arr.countryname"
+                        *ngIf="arr.isEdit"
+                        class="p-1"
+                      />
+                      <!-- </div> -->
+
+                      <label class="p-1 font-weight-normal" *ngIf="!arr.isEdit">{{
+                        arr.countryname
+                      }}</label>
+                    </td>
+                    <td class="p-1">
+                      <div *ngIf="arr.isEdit">
+                        <!-- <td class="p-1"> -->
+                          <!-- <button
+                            type="button"
+                            class="btn btn-primary mr-2"
+                            (click)="updatecountry(i)"
+                          > -->
+                          <i class="bi bi-arrow-up-circle mr-2" (click)="updatecountry(i)"></i>
+
+                          <!-- </button> -->
+                        <!-- </td> -->
+                        <!-- <td class="p-1"> -->
+                          <!-- <button
+                            type="button"
+                            class="btn btn-primary mr-2"
+                            (click)="arr.isEdit = false"
+                          > -->
+                          <i class="bi bi-x-circle mr-2" (click)="arr.isEdit = false"></i>
+
+                          <!-- </button> -->
+                        <!-- </td> -->
+                      </div>
+                      <div *ngIf="!arr.isEdit">
+                        <!-- <button
+                          type="button"
+                          class="btn btn-primary mr-2"
+                          (click)="onEdit(arr)"
+                        > -->
+                        <i class="bi bi-pencil-square mr-2" (click)="onEdit(arr)"></i>
+
+                        <!-- </button> -->
+
+                        <!-- <button
+                          type="button"
+                          class="btn btn-primary mr-2"
+                          (click)="deletecountry(arr.countryid)"
+                        > -->
+                        <i class="bi bi-trash3" (click)="deletecountry(arr.countryid)"></i>
+                        <!-- </button> -->
+                      </div>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+
+        <!-- <p>country works!</p>
+       </div>
+    </div>
+</div>
+<div class="container"> -->
+    <!-- <h1>Create Country</h1>
+
+    <form #countryForm="ngForm" (ngSubmit)="countryForm.form.valid &&countryf()">
+  <div class="form-group">
+        <label for="countryname">countryname</label><br />
+        <input type="text" name="countryname" [(ngModel)]="country.countryname" class="form-control me-2" type="text"
+        required #countryName="ngModel"
+        [ngClass]="{ 'is-invalid': countryForm.submitted && countryName.errors }"
+        placeholder="countryname" />
+        <div *ngIf="countryForm.submitted && countryName.errors" class="invalid-feedback">
+          <div *ngIf="countryName.errors['required']">
+            <span style="color: red;">Countryname is required</span>
+          </div>
+        </div>
+  </div>
+       <!<pre></pre> -->
+
+
+       <!-- <button class="btn btn-primary" type="submit">Submit</button>
+
+  <! to view enteries rows in a table -->
+  <!-- <hr>
+      <div>
+        <h2>country Data View</h2>
+        <table>
+        <thead>
+          <th class="tableHead">S.No</th>
+          <th class="tableHead">countryname</th>
+        </thead>
+        <tbody >
+         <tr *ngFor="let arr of countries; let i = index">
+            <td>{{i+1}}</td>
+            <td>
+              <div *ngIf="arr.isEdit">
+                <input type="text" name="countryname" [(ngModel)]="arr.countryname"  class="formControl"/>
+              </div>
+              <div *ngIf="!arr.isEdit">{{arr.countryname}}
+              </div>
+            </td>
+                <div *ngIf="arr.isEdit">
+                  <td><button type="button"  (click)="updatecountry(i)">Update</button></td>
+                  <td><button type="button" (click)="arr.isEdit=false">cancel</button></td>
+                </div>
+                <div *ngIf="!arr.isEdit">
+                  <td><button type="button" (click)="onEdit(arr)">Edit</button></td>
+                  <td><button type="button" (click)="deletecountry(arr.countryid)">Delete</button></td>
+
+                </div>
+          </tr>
+         </tbody>
+        </table>
+    </div> -->
